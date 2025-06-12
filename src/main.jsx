@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import CreateProfile from './pages/CreateProfile.jsx';
-import PlayerExperience from './pages/PlyaerExperience.jsx';
+import PlayerExperience from './pages/PlayerExperience.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -13,7 +13,7 @@ function WhyHoopsHub() {
   
           {/* Clip Grid Preview */}
           <div>
-            <img src="/clips-grid.png" alt="Clip thumbnails" className="rounded-xl mx-auto mb-4 w-[90%]" />
+            <img src="../assets/clips.png" alt="Clip thumbnails" className="rounded-xl mx-auto mb-4 w-[90%]" />
             <h3 className="text-lg font-semibold">Clip your best moments.</h3>
             <p className="text-gray-400 text-sm">Court by court.</p>
           </div>
