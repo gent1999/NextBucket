@@ -1,14 +1,32 @@
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Hero() {
   const navigate = useNavigate();
 
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/googlelogin`, {
+          access_token: tokenResponse.access_token,
+        });
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        navigate('/create-profile');
+      } catch (err) {
+        console.error('Login failed:', err);
+      }
+    },
+    onError: (err) => console.error('Google Login Error:', err),
+  });
+
   return (
     <section
       className="relative flex flex-col items-center justify-center text-center px-4 min-h-[65vh] bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/court-bg.jpg')",
-      }}
+      style={{ backgroundImage: "url('/court-bg.jpg')" }}
     >
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10">
@@ -21,7 +39,7 @@ function Hero() {
         </p>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-6 rounded shadow-md transition duration-300"
-          onClick={() => navigate('/create-profile')}
+          onClick={() => login()}
         >
           Create Your Portfolio
         </button>
