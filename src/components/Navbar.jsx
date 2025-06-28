@@ -1,4 +1,8 @@
+import { useAuth } from '../hooks/useAuth';
+
 function Navbar() {
+  const { login } = useAuth();
+
   return (
     <nav className="flex justify-between items-center px-6 py-2 bg-black border-b border-blue-600 shadow-lg">
       <div>
@@ -13,7 +17,9 @@ function Navbar() {
         <li className="hover:text-blue-400 transition duration-200 cursor-pointer mt-1">About</li>
         <li className="hover:text-blue-400 transition duration-200 cursor-pointer mt-1">FAQ</li>
         <li>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-5 rounded shadow-md transition duration-300">
+          <button 
+            onClick={() => login()}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-5 rounded shadow-md transition duration-300">
             Login
           </button>
         </li>
