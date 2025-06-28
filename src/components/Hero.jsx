@@ -15,7 +15,7 @@ function Hero() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        navigate('/create-profile');
+        navigate('/dashboard');
       } catch (err) {
         console.error('Login failed:', err);
       }
