@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 
 function Hero() {
-  const { login } = useAuth();
+  const { login } = useAuth(); // keep this as-is
   const navigate = useNavigate();
 
-  const login = useGoogleLogin({
+  const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/googlelogin`, {
@@ -13,6 +16,9 @@ function Hero() {
 
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
+
+        // optionally update auth context
+        login(data.user);
 
         navigate('/dashboard');
       } catch (err) {
@@ -38,7 +44,7 @@ function Hero() {
         </p>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-6 rounded shadow-md transition duration-300"
-          onClick={() => login()}
+          onClick={() => handleGoogleLogin()}
         >
           Create Your Portfolio
         </button>

@@ -15,7 +15,7 @@ export const useAuth = () => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        navigate('/player-exoerience');
+        navigate('/dashboard');
       } catch (err) {
         console.error('Login failed:', err);
       }
