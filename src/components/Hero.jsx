@@ -2,6 +2,25 @@ import { useAuth } from '../hooks/useAuth';
 
 function Hero() {
   const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/googlelogin`, {
+          access_token: tokenResponse.access_token,
+        });
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        navigate('/dashboard');
+      } catch (err) {
+        console.error('Login failed:', err);
+      }
+    },
+    onError: (err) => console.error('Google Login Error:', err),
+  });
 
   return (
     <section
