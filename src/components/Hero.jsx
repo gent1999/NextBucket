@@ -1,8 +1,7 @@
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 function Hero() {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const login = useGoogleLogin({

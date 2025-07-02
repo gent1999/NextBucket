@@ -1,8 +1,10 @@
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 function Navbar() {
   const location = useLocation();
   const user = JSON.parse(localStorage.getItem('user'));
+  const { login } = useAuth();
 
   const isDashboard = location.pathname.startsWith('/dashboard');
 
@@ -14,7 +16,7 @@ function Navbar() {
         <h1 className="text-xl text-white font-bold">NextBucket</h1>
       </div>
 
-      {/* Right side: conditional */}
+      {/* Right side */}
       {isDashboard ? (
         <div className="text-sm text-blue-300 font-medium">
           {user?.name ? `👤 ${user.name}` : 'User'}
@@ -25,7 +27,10 @@ function Navbar() {
           <li className="hover:text-blue-400 transition duration-200 cursor-pointer mt-1">About</li>
           <li className="hover:text-blue-400 transition duration-200 cursor-pointer mt-1">FAQ</li>
           <li>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-5 rounded shadow-md transition duration-300">
+            <button 
+              onClick={login}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-5 rounded shadow-md transition duration-300"
+            >
               Login
             </button>
           </li>
